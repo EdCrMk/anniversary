@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Hussein & Zahra | The Journey</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Added Vazirmatn and Lalezar for beautiful Persian typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&family=Lalezar&family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Lock body scrolling so ONLY the snapping container scrolls */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        /* Persian Language Styles */
+        body.fa-lang {
+            font-family: 'Vazirmatn', sans-serif;
+            direction: rtl;
+        }
+
+        /* The Strict Snapping Container */
+        #scroller {
+            height: 100vh;
+            width: 100%;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        
+        #scroller::-webkit-scrollbar {
+            display: none;
+        }
+
+        h1, h2 {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* Swap to Lalezar for Persian Headings */
+        body.fa-lang h1, body.fa-lang h2 {
+            font-family: 'Lalezar', cursive;
+            text-transform: none; /* Lalezar doesn't need uppercase */
+        }
+
+        .chapter-title {
+            font-size: clamp(3.5rem, 9vw, 11rem);
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+
+        /* Adjust line height for Persian heading font to prevent clipping */
+        body.fa-lang .chapter-title {
+            line-height: 1.1;
+        }
+
+        .fast-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            will-change: transform, opacity;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bg-dimmer {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.7), rgba(3,3,3,0.95));
+            z-index: 1;
+        }
+        
+        /* Language Button Styling */
+        #lang-toggle {
+            position: fixed;
+            top: 1.5rem;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Position toggle depending on direction */
+        body:not(.fa-lang) #lang-toggle { right: 1.5rem; }
+        body.fa-lang #lang-toggle { left: 1.5rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Language Toggle Button -->
+    <button id="lang-toggle">FA</button>
+
+    <main id="scroller">
+
+        <!-- SLIDE 1: THE WAR -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG1.jpg" class="w-full h-full object-cover" alt="Background 1">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="flex flex-col justify-center order-2 lg:order-1">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER I" data-fa="فصل اول">CHAPTER I</h2>
+                    <h1 class="chapter-title fast-reveal text-gray-200 translatable" data-en="THE<br>WAR." data-fa="جنگ.">THE<br>WAR.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="When the conflict erupted, the world stopped. The certainty of tomorrow was erased, replaced by the deafening reality of survival." data-fa="وقتی درگیری شروع شد، دنیا از حرکت ایستاد. اطمینان به فردا پاک شد و با واقعیت کرکننده بقا جایگزین شد.">When the conflict erupted, the world stopped. The certainty of tomorrow was erased, replaced by the deafening reality of survival.</p>
+                </div>
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal order-1 lg:order-2 bg-gray-900">
+                    <img src="Images\FG1.jpg" alt="Foreground 1">
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: LOSING EVERYTHING -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG2.jpg" class="w-full h-full object-cover" alt="Background 2">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal bg-gray-900">
+                    <img src="Images\FG2.jpg" alt="Foreground 2">
+                </div>
+                <div class="flex flex-col justify-center lg:px-12">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER II" data-fa="فصل دوم">CHAPTER II</h2>
+                    <h1 class="chapter-title fast-reveal text-gray-300 translatable" data-en="LOSING<br>EVERYTHING." data-fa="از دست دادن<br>همه چیز.">LOSING<br>EVERYTHING.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="The fallout. Watching the life we had planned dissolve into ash. No safety nets. No guarantees. Just the stark truth of what remained." data-fa="پیامدها. تماشای نابودی زندگی‌ای که برایش برنامه‌ریزی کرده بودیم و به خاکستر تبدیل شد. بدون هیچ شبکه حمایتی. بدون هیچ تضمینی. فقط حقیقت تلخ آنچه باقی مانده بود.">The fallout. Watching the life we had planned dissolve into ash. No safety nets. No guarantees. Just the stark truth of what remained.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: ZERO -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG3.jpg" class="w-full h-full object-cover" alt="Background 3">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="flex flex-col justify-center order-2 lg:order-1">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER III" data-fa="فصل سوم">CHAPTER III</h2>
+                    <h1 class="chapter-title fast-reveal text-white translatable" data-en="ZERO." data-fa="صفر.">ZERO.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="Stripped down to the foundations. With nothing left but each other, absolute zero became the ultimate blank slate." data-fa="بازگشت به نقطه صفر. وقتی چیزی جز یکدیگر نداشتیم، صفر مطلق به بوم خالی نهایی ما برای شروع دوباره تبدیل شد.">Stripped down to the foundations. With nothing left but each other, absolute zero became the ultimate blank slate.</p>
+                </div>
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal order-1 lg:order-2 bg-gray-900">
+                    <img src="Images\FG3.jpg" alt="Foreground 3">
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: FINDING HOPE -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG4.jpg" class="w-full h-full object-cover" alt="Background 4">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal bg-gray-900">
+                    <img src="Images\FG4.jpg" alt="Foreground 4">
+                </div>
+                <div class="flex flex-col justify-center lg:px-12">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER IV" data-fa="فصل چهارم">CHAPTER IV</h2>
+                    <h1 class="chapter-title fast-reveal text-gray-200 translatable" data-en="FINDING<br>HOPE." data-fa="یافتن<br>امید.">FINDING<br>HOPE.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="A spark in the absolute dark. The turning point where despair shifted into defiance. We found our reason to rebuild, and we found it in each other." data-fa="جرقه‌ای در تاریکی مطلق. نقطه عطفی که در آن ناامیدی به مقاومت تبدیل شد. ما دلیل خود را برای ساختن دوباره پیدا کردیم، و آن را در وجود یکدیگر یافتیم.">A spark in the absolute dark. The turning point where despair shifted into defiance. We found our reason to rebuild, and we found it in each other.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: IRON WILL -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG5.jpg" class="w-full h-full object-cover" alt="Background 5">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="flex flex-col justify-center order-2 lg:order-1">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER V" data-fa="فصل پنجم">CHAPTER V</h2>
+                    <h1 class="chapter-title fast-reveal text-gray-200 translatable" data-en="IRON<br>WILL." data-fa="اراده<br>پولادین.">IRON<br>WILL.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="The refusal to break. When logic dictated surrender, we dug in. Resilience wasn't a choice; it was the only way forward." data-fa="امتناع از شکستن. وقتی منطق حکم به تسلیم می‌داد، ما مقاومت کردیم. سرسختی یک انتخاب نبود؛ تنها راه پیش رو بود.">The refusal to break. When logic dictated surrender, we dug in. Resilience wasn't a choice; it was the only way forward.</p>
+                </div>
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal order-1 lg:order-2 bg-gray-900">
+                    <img src="Images\FG5.jpg" alt="Foreground 5">
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: 24/7 CODING -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG6.jpg" class="w-full h-full object-cover" alt="Background 6">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal bg-gray-900">
+                    <img src="Images\FG6.jpg" alt="Foreground 6">
+                </div>
+                <div class="flex flex-col justify-center lg:px-12">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER VI" data-fa="فصل ششم">CHAPTER VI</h2>
+                    <h1 class="chapter-title fast-reveal text-white translatable" data-en="24/7." data-fa="۲۴/۷.">24/7.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-300 fast-reveal max-w-xl translatable" data-en="The glow of the monitor in a pitch-black room. Lines of code, day and night. focused entirely on engineering our future from scratch, keystroke by keystroke, while the rest of the world slept." data-fa="درخشش مانیتور در اتاقی کاملاً تاریک. خطوط کد، روز و شب. تمرکز کامل بر مهندسی آینده‌مان از صفر، با هر ضربه روی کیبورد، در حالی که بقیه دنیا در خواب بودند.">The glow of the monitor in a pitch-black room. Lines of code, day and night. focused entirely on engineering our future from scratch, keystroke by keystroke, while the rest of the world slept.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: ACHIEVING DREAMS -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG7.jpg" class="w-full h-full object-cover" alt="Background 7">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="flex flex-col justify-center order-2 lg:order-1">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER VII" data-fa="فصل هفتم">CHAPTER VII</h2>
+                    <h1 class="chapter-title fast-reveal text-gray-300 translatable" data-en="ACHIEVING<br>DREAMS." data-fa="رسیدن به<br>رویاها.">ACHIEVING<br>DREAMS.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="Against the weight of a war-torn world, the vision took shape. The abstract became concrete. We could finally see the horizon we had fought so hard for." data-fa="در برابر سنگینی دنیایی ویران‌شده، چشم‌انداز ما شکل گرفت. مفاهیم انتزاعی به واقعیت پیوستند. بالاخره توانستیم افقی را که برایش این‌قدر سخت جنگیده بودیم ببینیم.">Against the weight of a war-torn world, the vision took shape. The abstract became concrete. We could finally see the horizon we had fought so hard for.</p>
+                </div>
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal order-1 lg:order-2 bg-gray-900">
+                    <img src="Images\FG7.jpg" alt="Foreground 7">
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: THRIVING -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG8.jpg" class="w-full h-full object-cover" alt="Background 8">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal bg-gray-900">
+                    <img src="Images\FG8.jpg" alt="Foreground 8">
+                </div>
+                <div class="flex flex-col justify-center lg:px-12">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER VIII" data-fa="فصل هشتم">CHAPTER VIII</h2>
+                    <h1 class="chapter-title fast-reveal text-gray-200 translatable" data-en="THRIVING." data-fa="شکوفایی.">THRIVING.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="We didn't just survive the storm. We conquered it. Standing tall on the solid foundation we built together from the absolute wreckage." data-fa="ما فقط از طوفان جان سالم به در نبردیم. ما آن را فتح کردیم. ایستاده و استوار بر پایه‌های محکمی که با هم از دل ویرانی‌ها ساختیم.">We didn't just survive the storm. We conquered it. Standing tall on the solid foundation we built together from the absolute wreckage.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: SANCTUARY -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex items-center px-6 md:px-20 overflow-hidden border-b border-white/5">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG9.jpg" class="w-full h-full object-cover" alt="Background 9">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-screen-2xl mx-auto">
+                <div class="flex flex-col justify-center order-2 lg:order-1">
+                    <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-4 fast-reveal translatable" data-en="CHAPTER IX" data-fa="فصل نهم">CHAPTER IX</h2>
+                    <h1 class="chapter-title fast-reveal text-gray-300 translatable" data-en="SANCTUARY." data-fa="پناهگاه.">SANCTUARY.</h1>
+                    <p class="mt-8 text-lg md:text-2xl text-gray-400 fast-reveal max-w-xl translatable" data-en="Building our fortress. The high-fidelity workstation, the lights dimmed, the world locked entirely out. A life fought for, and earned." data-fa="ساختن دژ ما. ایستگاه کاری با کیفیت بالا، نورهای کم، و دنیایی که کاملاً بیرون در مانده است. زندگی‌ای که برایش جنگیدیم و به دست آوردیم.">Building our fortress. The high-fidelity workstation, the lights dimmed, the world locked entirely out. A life fought for, and earned.</p>
+                </div>
+                <div class="h-[40vh] md:h-[65vh] image-container fast-reveal order-1 lg:order-2 bg-gray-900">
+                    <img src="Images\FG9.jpg" alt="Foreground 9">
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: MORE TO COME -->
+        <section class="relative h-screen w-full snap-start shrink-0 flex flex-col justify-center items-center px-6 md:px-20 overflow-hidden text-center">
+            <div class="absolute inset-0 z-0">
+                <img src="Images\BG10.jpg" class="w-full h-full object-cover" alt="Background 10">
+                <div class="bg-dimmer"></div>
+            </div>
+
+            <div class="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center pt-12">
+                <h2 class="text-gray-500 text-sm md:text-xl tracking-widest mb-2 fast-reveal translatable" data-en="CHAPTER X" data-fa="فصل دهم">CHAPTER X</h2>
+                <h1 class="chapter-title fast-reveal text-white mb-8 translatable" data-en="MORE TO<br>COME." data-fa="ادامه<br>دارد.">MORE TO<br>COME.</h1>
+                
+                <div class="w-full h-[35vh] md:h-[45vh] max-w-2xl image-container fast-reveal mb-8 mx-auto bg-gray-900">
+                    <img src="Images\FG10.jpg" alt="Foreground 10">
+                </div>
+                
+                <p class="text-lg md:text-xl text-gray-400 fast-reveal translatable" data-en="This is only the prologue. The future is entirely ours." data-fa="این تنها یک مقدمه است. آینده کاملاً متعلق به ماست.">This is only the prologue. The future is entirely ours.</p>
+                <p class="mt-6 text-xl md:text-3xl text-gray-100 font-semibold tracking-wide fast-reveal translatable" data-en="Happy Anniversary, Zahra." data-fa="سالگردمان مبارک، زهرا.">Happy Anniversary, Zahra.</p>
+                <p class="mt-2 text-xs md:text-sm tracking-widest text-gray-500 uppercase fast-reveal translatable" data-en="— Hussein" data-fa="— حسین">— Hussein</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            ScrollTrigger.defaults({
+                scroller: "#scroller"
+            });
+
+            const sections = gsap.utils.toArray("section");
+
+            sections.forEach((section) => {
+                const reveals = section.querySelectorAll('.fast-reveal');
+                
+                gsap.to(reveals, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 75%",
+                        toggleActions: "play none none reset"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: "power2.out",
+                    stagger: 0.1
+                });
+            });
+
+            // Language Toggle Logic
+            const toggleBtn = document.getElementById('lang-toggle');
+            const pageTitle = document.getElementById('page-title');
+            const translatables = document.querySelectorAll('.translatable');
+            let currentLang = 'en';
+
+            toggleBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'fa' : 'en';
+                
+                // Update Button Text
+                toggleBtn.innerText = currentLang === 'en' ? 'FA' : 'EN';
+                
+                // Toggle body class for fonts and RTL support
+                if (currentLang === 'fa') {
+                    document.body.classList.add('fa-lang');
+                    document.documentElement.lang = 'fa';
+                } else {
+                    document.body.classList.remove('fa-lang');
+                    document.documentElement.lang = 'en';
+                }
+
+                // Update Page Title
+                pageTitle.innerText = pageTitle.getAttribute(`data-${currentLang}`);
+
+                // Update all translatable text
+                translatables.forEach(el => {
+                    el.innerHTML = el.getAttribute(`data-${currentLang}`);
+                });
+
+                // Refresh ScrollTrigger as text height changes might alter snapping alignment
+                setTimeout(() => {
+                    ScrollTrigger.refresh();
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
